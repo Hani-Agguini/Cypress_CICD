@@ -8,5 +8,5 @@ class HomePage{
         this.elements.ProjetSauceDemo().click()
     }
 
-
 }
+export default new HomePage()
