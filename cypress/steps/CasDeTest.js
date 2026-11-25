@@ -88,23 +88,11 @@ Then('je saisie dans etape3 Action:{string} Donnees:{string} Resultat:{string}',
   // Write code here that turns the phrase above into concrete actions
 })
 
-Then('je vois {int} dans etapes', (int) => {
-  // Write code here that turns the phrase above into concrete actions
-})
-
-Then('je click sur ajouter une etape', () => {
-  // Write code here that turns the phrase above into concrete actions
-})
-
 Then('je saisie dans etape2 Action:{string} Donnees:{string} Resultat:{string}', (s, s2, s3) => {
   // Write code here that turns the phrase above into concrete actions
 })
 
 Then('je vois {int} dans etapes', (int) => {
-  // Write code here that turns the phrase above into concrete actions
-})
-
-When('je click sur ajouter une etape', () => {
   // Write code here that turns the phrase above into concrete actions
 })
 
