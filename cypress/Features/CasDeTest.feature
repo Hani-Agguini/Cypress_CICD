@@ -8,4 +8,4 @@ Feature: Ajout d'un cas de test
         And je click sur se connecter
         Then je suis redirege vers la page principale "https://fonctionnel.thrundrz.fr/"
         When je click sur projet sauce demo 
-        Then je suis rediregé vers page projet sauce demo 
+        Then je suis redirege vers page projet sauce demo "https://fonctionnel.thrundrz.fr/projects/2"
