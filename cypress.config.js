@@ -1,35 +1,49 @@
+
 const { defineConfig } = require("cypress");
-const { allureCypress } = require("allure-cypress/reporter")
+const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+
+const {
+    addCucumberPreprocessorPlugin
+} = require("@badeball/cypress-cucumber-preprocessor");
+
+const {
+    createEsbuildPlugin
+} = require("@badeball/cypress-cucumber-preprocessor/esbuild");
+
+const cypressOnFix = require("cypress-on-fix");
 
 module.exports = defineConfig({
-  
-  // rapport dedié mochawesome
-  reporter: "mochawesome",
-  reporterOptions: {
-    reportDir: "cypress/reports/mochawesome",
-    overwrite: false,
-    html: false,
-    json: true,
-  },
-  e2e: {
-    video: true,
-    screenshotsFolder: "cypress/screenshots",
-    videosFolder: "cypress/videos",
 
-    setupNodeEvents(on, config) {
-      // const envName = config.env.configFile || "recette_env" 
-      // const envConfig = require(`./cypress/config/${envName}.json`)
-      // config = {...config,...envConfig}
-      // implement node event listeners here
-      const { plugin: cypressGrepPlugin } = require("@cypress/grep/plugin")
-      cypressGrepPlugin(config)
-      
-      //allure report
-      allureCypress(on, config, {
-        resultsDir: "./allure-results",
-      })
+    e2e: {
 
-      return config
-    },
-  },
+        specPattern: [
+            "cypress/**/*.feature",
+            "cypress/**/*.cy.js"
+        ],
+
+        async setupNodeEvents(on, config) {
+
+            // 1. Permet de gérer plusieurs plugins
+            on = cypressOnFix(on);
+
+            // 2. Configuration Cucumber
+            await addCucumberPreprocessorPlugin(on, config);
+
+            // 3. Configuration Esbuild
+            on(
+                "file:preprocessor",
+                createBundler({
+                    plugins: [createEsbuildPlugin(config)]
+                })
+            );
+
+            // 4. Configuration Allure
+            const { allureCypress } =
+                await import("allure-cypress/reporter");
+
+            allureCypress(on, config);
+
+            return config;
+        }
+    }
 });
