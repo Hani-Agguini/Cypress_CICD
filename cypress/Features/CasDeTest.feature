@@ -34,3 +34,5 @@ Feature: Ajout d'un cas de test
         Then je vois 4 dans etapes
         And je saisie dans etape4 Action:"je click sur login " Donnees:"" Resultat:"rediretion vers inventory"
 
+        
+
