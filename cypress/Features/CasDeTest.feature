@@ -1,0 +1,11 @@
+Feature: Ajout d'un cas de test
+
+    Scenario: Ajout d'un cas de test 
+
+        Given je suis sur le site "https://fonctionnel.thrundrz.fr/"
+        When je saisi l email "teams1@gmail.com"
+        And je saisi le password "Teams2025@"
+        And je click sur se connecter
+        Then je suis rediregé vers la page principale 
+        When je click sur projet sauce demo 
+        Then je suis rediregé vers page projet sauce demo 
